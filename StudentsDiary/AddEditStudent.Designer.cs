@@ -44,11 +44,14 @@ namespace StudentsDiary
             this.label6 = new System.Windows.Forms.Label();
             this.tbPolishLang = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.ForeignLang = new System.Windows.Forms.TextBox();
+            this.tbForeignLang = new System.Windows.Forms.TextBox();
             this.rtbComents = new System.Windows.Forms.RichTextBox();
             this.lbComents = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnConform = new System.Windows.Forms.Button();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.cmbClassStudent = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbAddActive = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // tbId
@@ -165,18 +168,18 @@ namespace StudentsDiary
             this.label7.TabIndex = 13;
             this.label7.Text = "Jęz. obcy:";
             // 
-            // ForeignLang
+            // tbForeignLang
             // 
-            this.ForeignLang.Location = new System.Drawing.Point(132, 239);
-            this.ForeignLang.Name = "ForeignLang";
-            this.ForeignLang.Size = new System.Drawing.Size(284, 20);
-            this.ForeignLang.TabIndex = 14;
+            this.tbForeignLang.Location = new System.Drawing.Point(132, 239);
+            this.tbForeignLang.Name = "tbForeignLang";
+            this.tbForeignLang.Size = new System.Drawing.Size(284, 20);
+            this.tbForeignLang.TabIndex = 14;
             // 
             // rtbComents
             // 
-            this.rtbComents.Location = new System.Drawing.Point(132, 279);
+            this.rtbComents.Location = new System.Drawing.Point(132, 317);
             this.rtbComents.Name = "rtbComents";
-            this.rtbComents.Size = new System.Drawing.Size(284, 111);
+            this.rtbComents.Size = new System.Drawing.Size(284, 84);
             this.rtbComents.TabIndex = 15;
             this.rtbComents.Text = "";
             // 
@@ -199,27 +202,71 @@ namespace StudentsDiary
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnConform
+            // btnConfirm
             // 
-            this.btnConform.Location = new System.Drawing.Point(293, 407);
-            this.btnConform.Name = "btnConform";
-            this.btnConform.Size = new System.Drawing.Size(122, 26);
-            this.btnConform.TabIndex = 18;
-            this.btnConform.Text = "Zatwierdz";
-            this.btnConform.UseVisualStyleBackColor = true;
-            this.btnConform.Click += new System.EventHandler(this.btnConform_Click);
+            this.btnConfirm.Location = new System.Drawing.Point(293, 407);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(122, 26);
+            this.btnConfirm.TabIndex = 18;
+            this.btnConfirm.Text = "Zatwierdz";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // cmbClassStudent
+            // 
+            this.cmbClassStudent.FormattingEnabled = true;
+            this.cmbClassStudent.Items.AddRange(new object[] {
+            "1A",
+            "2A",
+            "3A",
+            "1B",
+            "2B",
+            "3B",
+            "1C",
+            "2C",
+            "3C"});
+            this.cmbClassStudent.Location = new System.Drawing.Point(135, 286);
+            this.cmbClassStudent.Name = "cmbClassStudent";
+            this.cmbClassStudent.Size = new System.Drawing.Size(280, 21);
+            this.cmbClassStudent.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(22, 285);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 20);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Klasa ucznia:";
+            // 
+            // cbAddActive
+            // 
+            this.cbAddActive.AutoSize = true;
+            this.cbAddActive.Location = new System.Drawing.Point(25, 262);
+            this.cbAddActive.MaximumSize = new System.Drawing.Size(120, 20);
+            this.cbAddActive.MinimumSize = new System.Drawing.Size(120, 20);
+            this.cbAddActive.Name = "cbAddActive";
+            this.cbAddActive.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbAddActive.Size = new System.Drawing.Size(120, 20);
+            this.cbAddActive.TabIndex = 23;
+            this.cbAddActive.Text = "Dodatkowe zajęcia";
+            this.cbAddActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbAddActive.UseVisualStyleBackColor = true;
             // 
             // AddEditStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnConform);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(441, 561);
+            this.Controls.Add(this.cbAddActive);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbClassStudent);
+            this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lbComents);
             this.Controls.Add(this.rtbComents);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.ForeignLang);
+            this.Controls.Add(this.tbForeignLang);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbPolishLang);
             this.Controls.Add(this.label5);
@@ -234,8 +281,11 @@ namespace StudentsDiary
             this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.lbId);
             this.Controls.Add(this.tbId);
+            this.MaximumSize = new System.Drawing.Size(457, 600);
+            this.MinimumSize = new System.Drawing.Size(457, 600);
             this.Name = "AddEditStudent";
-            this.Text = "AddEditStudent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Dodawanie ucznia";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,10 +308,13 @@ namespace StudentsDiary
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPolishLang;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox ForeignLang;
+        private System.Windows.Forms.TextBox tbForeignLang;
         private System.Windows.Forms.RichTextBox rtbComents;
         private System.Windows.Forms.Label lbComents;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnConform;
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.ComboBox cmbClassStudent;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox cbAddActive;
     }
 }

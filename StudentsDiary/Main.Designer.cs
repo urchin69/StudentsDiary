@@ -33,6 +33,10 @@ namespace StudentsDiary
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.dgvDiary = new System.Windows.Forms.DataGridView();
+            this.cmbClasses = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -79,18 +83,69 @@ namespace StudentsDiary
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // Form1
+            // dgvDiary
+            // 
+            this.dgvDiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDiary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDiary.BackgroundColor = System.Drawing.Color.White;
+            this.dgvDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDiary.Location = new System.Drawing.Point(16, 51);
+            this.dgvDiary.Name = "dgvDiary";
+            this.dgvDiary.RowHeadersVisible = false;
+            this.dgvDiary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDiary.Size = new System.Drawing.Size(1069, 526);
+            this.dgvDiary.TabIndex = 4;
+            // 
+            // cmbClasses
+            // 
+            this.cmbClasses.FormattingEnabled = true;
+            this.cmbClasses.Items.AddRange(new object[] {
+            "1A",
+            "2A",
+            "3A",
+            "1B",
+            "2B",
+            "3B",
+            "1C",
+            "2C",
+            "3C"});
+            this.cmbClasses.Location = new System.Drawing.Point(753, 7);
+            this.cmbClasses.Name = "cmbClasses";
+            this.cmbClasses.Size = new System.Drawing.Size(139, 21);
+            this.cmbClasses.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.GreenYellow;
+            this.label1.Location = new System.Drawing.Point(636, 9);
+            this.label1.MaximumSize = new System.Drawing.Size(100, 18);
+            this.label1.MinimumSize = new System.Drawing.Size(100, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 18);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Wybierz klasę:";
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 589);
+            this.ClientSize = new System.Drawing.Size(1097, 589);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbClasses);
+            this.Controls.Add(this.dgvDiary);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Main";
+            this.Text = "Dziennik ucznia";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -100,6 +155,9 @@ namespace StudentsDiary
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridView dgvDiary;
+        private System.Windows.Forms.ComboBox cmbClasses;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,19 +10,130 @@ namespace StudentsDiary
 {
     public partial class AddEditStudent : Form
     {
-        public AddEditStudent()
+
+        private bool _addActiveBol;
+        private string _addActiveStr;
+
+        private int _studentId;
+
+        private Student _student;
+
+        private FileHelper<List<Student>> _fileHelper = new FileHelper<List<Student>>(Program.FilePath);
+
+        public AddEditStudent(int id =0)//kontsruktor
         {
             InitializeComponent();
+
+            _studentId = id;
+
+             GetStudentData();
+
+            tbFirstName.Select();
         }
 
-        private void btnConform_Click(object sender, EventArgs e)
+
+
+        private void GetStudentData()
+        {
+            if (_studentId != 0)
+            {//edycja danych
+
+                Text = "Edytowanie ucznia";
+
+
+                var students = _fileHelper.DeserializeFromFile();
+                _student = students.FirstOrDefault(x => x.Id == _studentId);
+
+                if (_student == null)
+                {
+                    throw new Exception("Brak użytkownika o podanym Id");
+                }
+
+                FillTextBoxes();
+            }
+        }
+
+        private void FillTextBoxes()
+        {
+            if (_student.AddActive=="Tak")
+                _addActiveBol = true;
+            else
+                _addActiveBol = false;
+
+            tbId.Text = _student.Id.ToString();
+            tbFirstName.Text = _student.FirstName;
+            tbLastName.Text = _student.LastName;
+            tbMath.Text = _student.Math;
+            tbPhysic.Text = _student.Physics;
+            tbTechnology.Text = _student.Technology;
+            tbPolishLang.Text = _student.PolishLang;
+            tbForeignLang.Text = _student.ForeignLang;
+            rtbComents.Text = _student.Comments;
+            cbAddActive.Checked= _addActiveBol;
+            cmbClassStudent.SelectedItem = _student.ClassStudent;
+
+        }
+
+
+        private async  void btnConfirm_Click(object sender, EventArgs e)
+        {
+            var students = _fileHelper.DeserializeFromFile();
+
+
+            if (_studentId != 0)
+            {
+                students.RemoveAll(x => x.Id == _studentId);
+            }
+            else
+            {
+                AssignIdNewStudent(students);
+            }
+
+            AddNewUserToList(students);
+
+            _fileHelper.SerializeToFile(students);
+
+            Close();
+        }
+
+        private void AddNewUserToList(List<Student> students)
         {
 
+            if (cbAddActive.Checked)
+                _addActiveStr = "Tak";
+            else
+                _addActiveStr = "Nie";
+
+
+            var student = new Student
+            {
+
+            Id = _studentId,
+                FirstName = tbFirstName.Text,
+                LastName = tbLastName.Text,
+                Math = tbMath.Text,
+                Technology = tbTechnology.Text,
+                Physics = tbPhysic.Text,
+                PolishLang = tbPolishLang.Text,
+                ForeignLang = tbForeignLang.Text,
+                Comments = rtbComents.Text,
+                AddActive = _addActiveStr,
+                ClassStudent = cmbClassStudent.Text
+
+            };
+
+            students.Add(student);
+        }
+
+        private void AssignIdNewStudent(List<Student> students)
+        {
+            var studentWithHighestID = students.OrderByDescending(x => x.Id).FirstOrDefault();
+            _studentId = studentWithHighestID == null ? 1 : studentWithHighestID.Id + 1;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            Close();//metoda dziedziczona po klasie Form
         }
     }
 }
