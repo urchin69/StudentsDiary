@@ -215,16 +215,6 @@ namespace StudentsDiary
             // cmbClassStudent
             // 
             this.cmbClassStudent.FormattingEnabled = true;
-            this.cmbClassStudent.Items.AddRange(new object[] {
-            "1A",
-            "2A",
-            "3A",
-            "1B",
-            "2B",
-            "3B",
-            "1C",
-            "2C",
-            "3C"});
             this.cmbClassStudent.Location = new System.Drawing.Point(135, 286);
             this.cmbClassStudent.Name = "cmbClassStudent";
             this.cmbClassStudent.Size = new System.Drawing.Size(280, 21);

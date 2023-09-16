@@ -8,20 +8,24 @@ using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
-    public class FileHelper<T> where T : new()//typ Generic
+    public class FileHelper2<T> where T : new()//typ Generic
     {
+
+
+        //private string _filePath;
         private string _filePath2;
 
-        public FileHelper(string filePath2)//kontruktor
+
+        public FileHelper2(string filePath2)//kontruktor
         {
             _filePath2 = filePath2;
         }
-        public void SerializeToFile(T students)
+        public void SerializeToFile(T classes)
         {
             var serializer = new XmlSerializer(typeof(T));
             using (var streamWriter = new StreamWriter(_filePath2))
             {
-                serializer.Serialize(streamWriter, students);//przekazujemy obiekty
+                serializer.Serialize(streamWriter, classes);//przekazujemy obiekty
                 streamWriter.Close(); //zamykamy strumień
             }
         }
@@ -35,16 +39,16 @@ namespace StudentsDiary
 
             using (var streamReader = new StreamReader(_filePath2))
             {
-                var students = (T)serializer.Deserialize(streamReader);//ta metoda zwraca object dlatego musimy rzutować na listę studentów
+                var classes = (T)serializer.Deserialize(streamReader);//ta metoda zwraca object dlatego musimy rzutować na listę studentów
                 streamReader.Close();
                 //stream.Dispose() zawsze zostanie wykonane dzięki metodzie using
-                return students;
+                return classes;
             }
         }
 
     }
 
-   
 
-   
+
 }
+

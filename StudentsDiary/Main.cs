@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
@@ -11,7 +12,10 @@ namespace StudentsDiary
         private delegate void DisplayMessage(string message);//deklaracja delegata w klasie Main
 
         private FileHelper<List<Student>> _fileHelper = new FileHelper<List<Student>>(Program.FilePath);
+        //private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
 
+
+        private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
 
         public bool IsMaximize
         {
@@ -35,12 +39,41 @@ namespace StudentsDiary
 
             if (IsMaximize)
                 WindowState = FormWindowState.Maximized;
+
+
+            //var students= _fileHelper.DeserializeFromFile();
+
+            //foreach (var Item in students)
+            //{
+            //    MessageBox.Show(Item.FirstName);
+            //}
+
+            //classes
+            var classes = _fileHelper2.DeserializeFromFile();
+
+            foreach (var Item in classes)
+            {
+               // MessageBox.Show(Item.ClassName);
+
+               cmbClasses.Items.Add(Item.ClassName);
+            }
+
+
+
+
         }
                 
         private void RefreshDiary()
         {
             var students = _fileHelper.DeserializeFromFile();
             dgvDiary.DataSource = students;
+
+            //var classes = _fileHelper2.DeserializeFromFile2();
+            //cmbClasses.DataSource = classes;
+
+            var classes = _fileHelper2.DeserializeFromFile();
+            cmbClasses.SelectedItem = classes;
+
         }
 
         private void SetColumnsHeder()

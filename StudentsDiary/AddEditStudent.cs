@@ -11,6 +11,9 @@ namespace StudentsDiary
     public partial class AddEditStudent : Form
     {
 
+        private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
+
+
         private bool _addActiveBol;
         private string _addActiveStr;
 
@@ -29,6 +32,18 @@ namespace StudentsDiary
              GetStudentData();
 
             tbFirstName.Select();
+
+            var classes = _fileHelper2.DeserializeFromFile();
+
+            foreach (var Item in classes)
+            {
+                // MessageBox.Show(Item.ClassName);
+
+                 cmbClassStudent.Items.Add(Item.ClassName);
+            }
+
+
+
         }
 
 
@@ -70,8 +85,10 @@ namespace StudentsDiary
             tbForeignLang.Text = _student.ForeignLang;
             rtbComents.Text = _student.Comments;
             cbAddActive.Checked= _addActiveBol;
-            cmbClassStudent.SelectedItem = _student.ClassStudent;
+            cmbClassStudent.Text= _student.ClassStudent;
 
+            //MessageBox.Show(_student.ClassStudent);
+        
         }
 
 
