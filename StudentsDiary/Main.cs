@@ -32,48 +32,38 @@ namespace StudentsDiary
         public Main()//konstruktor
         {
             InitializeComponent();
-
             RefreshDiary();
-
             SetColumnsHeder();
 
             if (IsMaximize)
                 WindowState = FormWindowState.Maximized;
-
-
-            //var students= _fileHelper.DeserializeFromFile();
-
-            //foreach (var Item in students)
-            //{
-            //    MessageBox.Show(Item.FirstName);
-            //}
+            var students = _fileHelper.DeserializeFromFile();
 
             //classes
             var classes = _fileHelper2.DeserializeFromFile();
-
+            cmbClasses.Items.Add("Wszystkie");
             foreach (var Item in classes)
             {
-               // MessageBox.Show(Item.ClassName);
-
                cmbClasses.Items.Add(Item.ClassName);
             }
-
-
-
 
         }
                 
         private void RefreshDiary()
         {
-            var students = _fileHelper.DeserializeFromFile();
+            var students= _fileHelper.DeserializeFromFile();
+
+            if (cmbClasses.Text!="Wszystkie")
+            {
+                students = _fileHelper.DeserializeFromFile().Where(X => X.ClassStudent == cmbClasses.Text).ToList();
+            }
+            else
+            {
+                students = _fileHelper.DeserializeFromFile();
+            }
             dgvDiary.DataSource = students;
-
-            //var classes = _fileHelper2.DeserializeFromFile2();
-            //cmbClasses.DataSource = classes;
-
             var classes = _fileHelper2.DeserializeFromFile();
             cmbClasses.SelectedItem = classes;
-
         }
 
         private void SetColumnsHeder()
@@ -103,7 +93,6 @@ namespace StudentsDiary
         private void AddEdiStudent_StudentAdded()
         {
             RefreshDiary();
-
             //throw new NotImplementedException();
         }
 
@@ -114,7 +103,6 @@ namespace StudentsDiary
                 MessageBox.Show("Proszę zaznacz ucznia, którego dane chcesz edytować");
                 return;
             }
-
             var addEditStudent = new AddEditStudent(Convert.ToInt32(dgvDiary.SelectedRows[0].Cells[0].Value));//tworzymy nowy obiekt klasy
             addEditStudent.FormClosing += AddEditStudent_FormClosing;
             addEditStudent.ShowDialog();
@@ -175,6 +163,11 @@ namespace StudentsDiary
             else
                 IsMaximize = false;
             Settings.Default.Save();
+        }
+
+        private void cmbClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshDiary();
         }
     }
 }

@@ -105,6 +105,8 @@ namespace StudentsDiary
             this.cmbClasses.Name = "cmbClasses";
             this.cmbClasses.Size = new System.Drawing.Size(139, 21);
             this.cmbClasses.TabIndex = 5;
+            this.cmbClasses.Text = "Wszystkie";
+            this.cmbClasses.SelectedIndexChanged += new System.EventHandler(this.cmbClasses_SelectedIndexChanged);
             // 
             // label1
             // 
