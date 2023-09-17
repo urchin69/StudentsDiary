@@ -10,16 +10,16 @@ namespace StudentsDiary
 {
     public class FileHelper<T> where T : new()//typ Generic
     {
-        private string _filePath2;
+        private string _filePath;
 
-        public FileHelper(string filePath2)//kontruktor
+        public FileHelper(string filePath)//kontruktor
         {
-            _filePath2 = filePath2;
+            _filePath = filePath;
         }
         public void SerializeToFile(T students)
         {
             var serializer = new XmlSerializer(typeof(T));
-            using (var streamWriter = new StreamWriter(_filePath2))
+            using (var streamWriter = new StreamWriter(_filePath))
             {
                 serializer.Serialize(streamWriter, students);//przekazujemy obiekty
                 streamWriter.Close(); //zamykamy strumień
@@ -28,12 +28,12 @@ namespace StudentsDiary
 
         public T DeserializeFromFile()
         {
-            if (!File.Exists(_filePath2))
+            if (!File.Exists(_filePath))
                 return new T();
 
             var serializer = new XmlSerializer(typeof(T));
 
-            using (var streamReader = new StreamReader(_filePath2))
+            using (var streamReader = new StreamReader(_filePath))
             {
                 var students = (T)serializer.Deserialize(streamReader);//ta metoda zwraca object dlatego musimy rzutować na listę studentów
                 streamReader.Close();
