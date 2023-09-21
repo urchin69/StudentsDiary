@@ -11,11 +11,7 @@ namespace StudentsDiary
     public partial class AddEditStudent : Form
     {
 
-        private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
-
-
-        private bool _addActiveBol;
-        private string _addActiveStr;
+        private FileHelper<List<Classes>> _fileHelper2 = new FileHelper<List<Classes>>(Program.FilePath2);
 
         private int _studentId;
 
@@ -37,8 +33,6 @@ namespace StudentsDiary
 
             foreach (var Item in classes)
             {
-                // MessageBox.Show(Item.ClassName);
-
                  cmbClassStudent.Items.Add(Item.ClassName);
             }
 
@@ -70,10 +64,10 @@ namespace StudentsDiary
 
         private void FillTextBoxes()
         {
-            if (_student.AddActive=="Tak")
-                _addActiveBol = true;
-            else
-                _addActiveBol = false;
+            //if (_student.AddActive=="Tak")
+            //    _addActiveBol = true;
+            //else
+            //    _addActiveBol = false;
 
             tbId.Text = _student.Id.ToString();
             tbFirstName.Text = _student.FirstName;
@@ -84,7 +78,7 @@ namespace StudentsDiary
             tbPolishLang.Text = _student.PolishLang;
             tbForeignLang.Text = _student.ForeignLang;
             rtbComents.Text = _student.Comments;
-            cbAddActive.Checked= _addActiveBol;
+            cbAddActive.Checked= _student.AddActive;
             cmbClassStudent.Text= _student.ClassStudent;
 
             //MessageBox.Show(_student.ClassStudent);
@@ -116,16 +110,16 @@ namespace StudentsDiary
         private void AddNewUserToList(List<Student> students)
         {
 
-            if (cbAddActive.Checked)
-                _addActiveStr = "Tak";
-            else
-                _addActiveStr = "Nie";
+            //if (cbAddActive.Checked)
+            //    _addActiveStr = "Tak";
+            //else
+            //    _addActiveStr = "Nie";
 
 
             var student = new Student
             {
 
-            Id = _studentId,
+                Id = _studentId,
                 FirstName = tbFirstName.Text,
                 LastName = tbLastName.Text,
                 Math = tbMath.Text,
@@ -134,7 +128,7 @@ namespace StudentsDiary
                 PolishLang = tbPolishLang.Text,
                 ForeignLang = tbForeignLang.Text,
                 Comments = rtbComents.Text,
-                AddActive = _addActiveStr,
+                AddActive = cbAddActive.Checked,
                 ClassStudent = cmbClassStudent.Text
 
             };

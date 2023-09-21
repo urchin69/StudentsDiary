@@ -15,7 +15,7 @@ namespace StudentsDiary
         //private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
 
 
-        private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
+        private FileHelper<List<Classes>> _fileHelper2 = new FileHelper<List<Classes>>(Program.FilePath2);
 
         public bool IsMaximize
         {

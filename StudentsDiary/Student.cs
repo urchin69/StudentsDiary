@@ -31,7 +31,7 @@ namespace StudentsDiary
         public string Physics { get; set; }
         public string PolishLang { get; set; }
         public string ForeignLang { get; set; }
-        public string AddActive { get; set; }
+        public bool AddActive { get; set; }
 
         public string ClassStudent { get; set; }
         public Address Address { get; set; }
