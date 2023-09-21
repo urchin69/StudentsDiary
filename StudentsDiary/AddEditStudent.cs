@@ -64,11 +64,6 @@ namespace StudentsDiary
 
         private void FillTextBoxes()
         {
-            //if (_student.AddActive=="Tak")
-            //    _addActiveBol = true;
-            //else
-            //    _addActiveBol = false;
-
             tbId.Text = _student.Id.ToString();
             tbFirstName.Text = _student.FirstName;
             tbLastName.Text = _student.LastName;
@@ -80,8 +75,6 @@ namespace StudentsDiary
             rtbComents.Text = _student.Comments;
             cbAddActive.Checked= _student.AddActive;
             cmbClassStudent.Text= _student.ClassStudent;
-
-            //MessageBox.Show(_student.ClassStudent);
         
         }
 
@@ -109,12 +102,6 @@ namespace StudentsDiary
 
         private void AddNewUserToList(List<Student> students)
         {
-
-            //if (cbAddActive.Checked)
-            //    _addActiveStr = "Tak";
-            //else
-            //    _addActiveStr = "Nie";
-
 
             var student = new Student
             {
