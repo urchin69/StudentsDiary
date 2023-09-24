@@ -10,7 +10,7 @@ namespace StudentsDiary
     static class Program
     {
         public static string FilePath = Path.Combine(Environment.CurrentDirectory, "students.txt");
-        public static string FilePath2 = Path.Combine(Environment.CurrentDirectory, "classes.txt");
+        //public static string FilePath2 = Path.Combine(Environment.CurrentDirectory, "classes.txt");
         [STAThread]
 
         static void Main()

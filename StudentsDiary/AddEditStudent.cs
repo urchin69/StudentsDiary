@@ -11,47 +11,47 @@ namespace StudentsDiary
     public partial class AddEditStudent : Form
     {
 
-        private FileHelper<List<Classes>> _fileHelper2 = new FileHelper<List<Classes>>(Program.FilePath2);
-
         private int _studentId;
 
         private Student _student;
+
+        public List<Classes> _classes;
 
         private FileHelper<List<Student>> _fileHelper = new FileHelper<List<Student>>(Program.FilePath);
 
         public AddEditStudent(int id =0)//kontsruktor
         {
             InitializeComponent();
-
             _studentId = id;
 
-             GetStudentData();
+            _classes = HelperClasses.GetClasses("Brak");
+
+            InitGroupsComboBox();
+
+            GetStudentData();
 
             tbFirstName.Select();
 
-            var classes = _fileHelper2.DeserializeFromFile();
-
-            foreach (var Item in classes)
-            {
-                 cmbClassStudent.Items.Add(Item.ClassName);
-            }
-
-
-
         }
 
-
+       private void InitGroupsComboBox()
+        {
+            cmbClassStudent.DataSource = _classes;//inicjalizacja ComboBox
+            cmbClassStudent.DisplayMember = "ClassName";
+            cmbClassStudent.ValueMember = "Id";
+        }
 
         private void GetStudentData()
         {
+
             if (_studentId != 0)
             {//edycja danych
-
                 Text = "Edytowanie ucznia";
-
-
                 var students = _fileHelper.DeserializeFromFile();
+                
                 _student = students.FirstOrDefault(x => x.Id == _studentId);
+
+
 
                 if (_student == null)
                 {
@@ -64,6 +64,7 @@ namespace StudentsDiary
 
         private void FillTextBoxes()
         {
+
             tbId.Text = _student.Id.ToString();
             tbFirstName.Text = _student.FirstName;
             tbLastName.Text = _student.LastName;
@@ -74,10 +75,10 @@ namespace StudentsDiary
             tbForeignLang.Text = _student.ForeignLang;
             rtbComents.Text = _student.Comments;
             cbAddActive.Checked= _student.AddActive;
-            cmbClassStudent.Text= _student.ClassStudent;
-        
-        }
+          
+            cmbClassStudent.SelectedItem = _classes.FirstOrDefault(x => x.Id == _student.ClassStudent);
 
+        }
 
         private async  void btnConfirm_Click(object sender, EventArgs e)
         {
@@ -116,7 +117,7 @@ namespace StudentsDiary
                 ForeignLang = tbForeignLang.Text,
                 Comments = rtbComents.Text,
                 AddActive = cbAddActive.Checked,
-                ClassStudent = cmbClassStudent.Text
+                ClassStudent = (cmbClassStudent.SelectedItem as Classes).Id
 
             };
 
@@ -133,5 +134,7 @@ namespace StudentsDiary
         {
             Close();//metoda dziedziczona po klasie Form
         }
+
+ 
     }
 }

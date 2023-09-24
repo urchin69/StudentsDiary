@@ -12,10 +12,8 @@ namespace StudentsDiary
         private delegate void DisplayMessage(string message);//deklaracja delegata w klasie Main
 
         private FileHelper<List<Student>> _fileHelper = new FileHelper<List<Student>>(Program.FilePath);
-        //private FileHelper2<List<Classes>> _fileHelper2 = new FileHelper2<List<Classes>>(Program.FilePath2);
-
-
-        private FileHelper<List<Classes>> _fileHelper2 = new FileHelper<List<Classes>>(Program.FilePath2);
+        private List<Classes> _classes;
+    
 
         public bool IsMaximize
         {
@@ -32,38 +30,43 @@ namespace StudentsDiary
         public Main()//konstruktor
         {
             InitializeComponent();
+
+            _classes = HelperClasses.GetClasses("Wszyscy");
+
+            InitGroupsComboBox();
+            
             RefreshDiary();
+      
             SetColumnsHeder();
+               
 
             if (IsMaximize)
                 WindowState = FormWindowState.Maximized;
             var students = _fileHelper.DeserializeFromFile();
 
-            //classes
-            var classes = _fileHelper2.DeserializeFromFile();
-            cmbClasses.Items.Add("Wszystkie");
-            foreach (var Item in classes)
-            {
-               cmbClasses.Items.Add(Item.ClassName);
-            }
-
         }
-                
+
+        private void InitGroupsComboBox()
+        {   
+                cmbClassStudent.DataSource = _classes;//inicjalizacja ComboBox
+                cmbClassStudent.DisplayMember = "ClassName";
+                cmbClassStudent.ValueMember = "Id";
+      
+        }
+
         private void RefreshDiary()
         {
-            var students= _fileHelper.DeserializeFromFile();
+            var students = _fileHelper.DeserializeFromFile();
 
-            if (cmbClasses.Text!="Wszystkie")
+            var selectedClassesId = (cmbClassStudent.SelectedItem as Classes).Id;
+
+            if (selectedClassesId !=0)
             {
-                students = _fileHelper.DeserializeFromFile().Where(X => X.ClassStudent == cmbClasses.Text).ToList();
+                students = students.Where(x => x.ClassStudent == selectedClassesId).ToList();
             }
-            else
-            {
-                students = _fileHelper.DeserializeFromFile();
-            }
+
             dgvDiary.DataSource = students;
-            var classes = _fileHelper2.DeserializeFromFile();
-            cmbClasses.SelectedItem = classes;
+
         }
 
         private void SetColumnsHeder()
@@ -87,13 +90,11 @@ namespace StudentsDiary
             var addEditStudent = new AddEditStudent();
             addEditStudent.FormClosing += AddEditStudent_FormClosing;
             addEditStudent.ShowDialog();
-            // RefreshDiary();
-        }
+         }
 
         private void AddEdiStudent_StudentAdded()
         {
             RefreshDiary();
-            //throw new NotImplementedException();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -151,11 +152,6 @@ namespace StudentsDiary
             RefreshDiary();
         }
 
-        //private void Main_Load(object sender, EventArgs e)
-        //{
-
-        //}
-
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (WindowState == FormWindowState.Maximized)
@@ -165,7 +161,7 @@ namespace StudentsDiary
             Settings.Default.Save();
         }
 
-        private void cmbClasses_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbClassStudent_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshDiary();
         }

@@ -276,6 +276,7 @@ namespace StudentsDiary
             this.Name = "AddEditStudent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dodawanie ucznia";
+      
             this.ResumeLayout(false);
             this.PerformLayout();
 

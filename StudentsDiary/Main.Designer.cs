@@ -34,7 +34,7 @@ namespace StudentsDiary
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvDiary = new System.Windows.Forms.DataGridView();
-            this.cmbClasses = new System.Windows.Forms.ComboBox();
+            this.cmbClassStudent = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiary)).BeginInit();
             this.SuspendLayout();
@@ -98,15 +98,15 @@ namespace StudentsDiary
             this.dgvDiary.Size = new System.Drawing.Size(1069, 526);
             this.dgvDiary.TabIndex = 4;
             // 
-            // cmbClasses
+            // cmbClassStudent
             // 
-            this.cmbClasses.FormattingEnabled = true;
-            this.cmbClasses.Location = new System.Drawing.Point(753, 7);
-            this.cmbClasses.Name = "cmbClasses";
-            this.cmbClasses.Size = new System.Drawing.Size(139, 21);
-            this.cmbClasses.TabIndex = 5;
-            this.cmbClasses.Text = "Wszystkie";
-            this.cmbClasses.SelectedIndexChanged += new System.EventHandler(this.cmbClasses_SelectedIndexChanged);
+            this.cmbClassStudent.FormattingEnabled = true;
+            this.cmbClassStudent.Location = new System.Drawing.Point(753, 7);
+            this.cmbClassStudent.Name = "cmbClassStudent";
+            this.cmbClassStudent.Size = new System.Drawing.Size(139, 21);
+            this.cmbClassStudent.TabIndex = 5;
+            this.cmbClassStudent.Text = "Wszystkie";
+            this.cmbClassStudent.SelectedIndexChanged += new System.EventHandler(this.cmbClassStudent_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -126,7 +126,7 @@ namespace StudentsDiary
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 589);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbClasses);
+            this.Controls.Add(this.cmbClassStudent);
             this.Controls.Add(this.dgvDiary);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDelete);
@@ -148,7 +148,7 @@ namespace StudentsDiary
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvDiary;
-        private System.Windows.Forms.ComboBox cmbClasses;
+        private System.Windows.Forms.ComboBox cmbClassStudent;
         private System.Windows.Forms.Label label1;
     }
 }

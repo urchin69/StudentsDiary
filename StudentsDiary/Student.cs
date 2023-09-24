@@ -33,7 +33,7 @@ namespace StudentsDiary
         public string ForeignLang { get; set; }
         public bool AddActive { get; set; }
 
-        public string ClassStudent { get; set; }
+        public int ClassStudent { get; set; }
         public Address Address { get; set; }
 
 
