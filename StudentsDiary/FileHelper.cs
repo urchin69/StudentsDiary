@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace StudentsDiary
 {
+
     public class FileHelper<T> where T : new()//typ Generic
     {
         private string _filePath;
